@@ -15,38 +15,28 @@ class Ship(Sprite):
 		self.image = pygame.image.load('images/ship.bmp')
 		self.rect = self.image.get_rect()
 
-		#Start each new ship at the bottom center of the screen.
-		self.rect.midbottom = self.screen_rect.midbottom
+		#Start each new ship at the center of the screen.
+		self.rect.center = self.screen_rect.center
 
-		#Store a decimal value for the ship's horizontal position
-		self.x = float(self.rect.x)
-		self.y = float(self.rect.y)
-
-		#Movement flag
+		#Current location
 		self.moving_right = False
 		self.moving_left = False
 		self.moving_up = False
 		self.moving_down = False
-
-	def update(self): 
-		"""Update the ship's position based on the movement flag."""
-		if self.moving_right and self.rect.right < self.screen_rect.right: 
-			self.x += self.settings.ship_speed
-		elif self.moving_left and self.rect.left >0: 
-			self.x -= self.settings.ship_speed
-		elif self.moving_up and self.rect.top > 0:
-			self.y -= self.settings.ship_speed
-		elif self.moving_down and self.rect.bottom < self.screen_rect.bottom:
-			self.y += self.settings.ship_speed
-
-		#Update rect object from self.x
-		self.rect.x = self.x
-		self.rect.y = self.y
-
+	
 	def blitme(self): 
 		"""Draw the ship at its current location."""
 		self.screen.blit(self.image, self.rect)
 
-	def center_ship(self): 
-		self.rect.midbottom = self.screen_rect.midbottom
-		self.x = float(self.rect.x)
+	def update(self): 
+		if self.moving_right == True and self.rect.right < self.screen_rect.right:
+			self.rect.x += 1
+		elif self.moving_left == True and self.rect.left > 0: 
+			self.rect.x -=1
+		elif self.moving_up == True and self.rect.top > 0: 
+			self.rect.y -=1
+		elif self.moving_down == True and self.rect.bottom < self.screen_rect.bottom: 
+			self.rect.y +=1
+
+
+

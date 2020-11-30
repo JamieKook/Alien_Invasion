@@ -34,6 +34,7 @@ class AlienInvasion:
         self._create_fleet()
 
         self.play_button = Button(self, "Play")
+     
 
 
     def run_game(self):
@@ -212,7 +213,7 @@ class AlienInvasion:
         #self.screen.blit(self.settings.bg_image, (0,0))
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
-        for bullcd et in self.bullets.sprites(): 
+        for bullet in self.bullets.sprites(): 
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
         self.sb.show_score()
