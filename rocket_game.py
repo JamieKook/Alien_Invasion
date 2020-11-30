@@ -4,6 +4,7 @@ from settings import Settings
 from controls import Controls
 
 from ship import Ship
+from bullet import Bullet
 
 
 class RocketGame: 
@@ -13,14 +14,14 @@ class RocketGame:
 		#Initialize the game 
 		pygame.init()
 		self.settings = Settings()
-
-
-		
 		self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
 		pygame.display.set_caption("Rocket Game")
 
+		self.bullets = pygame.sprite.Group()
 		self.ship = Ship(self)
 		self.controls = Controls(self.ship)
+
+
 
 
 	def run_game(self): 
@@ -43,11 +44,14 @@ class RocketGame:
 	
 	def _update_pieces(self): 
 		self.ship.update()
+		self.bullets.update()
 
 #####
 	def _updated_screen(self): 
 		self.screen.blit(self.settings.bg_image, (0,0))
 		self.ship.blitme()
+		for bullet in self.bullets.sprites(): 
+			bullet.draw_bullet()
 
 
 

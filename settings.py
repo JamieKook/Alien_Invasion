@@ -9,3 +9,9 @@ class Settings:
 		self.screen_height = 650
 		self.bg_color = (143, 155, 176)
 		self.bg_image = pygame.image.load('images/stars.bmp')
+
+		# Ship settings
+		self.ship_speed = 1
+
+		# Bullet settings
+		self.bullet_speed = 0.5

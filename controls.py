@@ -26,6 +26,8 @@ class Controls:
 			self.ship.moving_down = True
 		elif event.key == pygame.K_q:
 			sys.exit()
+		elif event.key == pygame.K_SPACE: 
+			self.ship._fire_bullet()
 
 	def _keyup_events(self, event): 
 		if event.key == pygame.K_RIGHT: 
@@ -36,3 +38,5 @@ class Controls:
 			self.ship.moving_up = False
 		elif event.key == pygame.K_DOWN: 
 			self.ship.moving_down = False
+
+	
