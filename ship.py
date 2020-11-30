@@ -42,8 +42,9 @@ class Ship(Sprite):
 			self.rect.y += self.settings.ship_speed
 
 	def _fire_bullet(self):
-		new_bullet = Bullet(self.game)
-		self.bullets.add(new_bullet)
+		if self.settings.bullet_number > len(self.bullets):
+			new_bullet = Bullet(self.game)
+			self.bullets.add(new_bullet)
 
 
 

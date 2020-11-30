@@ -15,3 +15,4 @@ class Settings:
 
 		# Bullet settings
 		self.bullet_speed = 0.5
+		self.bullet_number = 3
