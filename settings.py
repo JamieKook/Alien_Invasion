@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 
 class Settings: 
 	#A class to store all settings for RocketGame
@@ -16,3 +17,7 @@ class Settings:
 		# Bullet settings
 		self.bullet_speed = 0.5
 		self.bullet_number = 3
+
+		# Star settings
+		self.star_speed_x = 1 
+		self.star_speed_y = 1 

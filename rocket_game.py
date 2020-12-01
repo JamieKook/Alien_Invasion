@@ -1,11 +1,13 @@
 import pygame
 import sys
+from random import randint
 from settings import Settings
 from controls import Controls
 
 from ship import Ship
 from bullet import Bullet
 from stars import StarGrid
+from wormhole import Wormhole
 
 
 class RocketGame: 
@@ -23,8 +25,9 @@ class RocketGame:
 		self.ship = Ship(self)
 		self.controls = Controls(self.ship)
 		self.star_grid = StarGrid(self)
-
-
+		self.wormholes = pygame.sprite.Group()
+		self.wormhole = Wormhole(self)
+		self.wormholes.add(self.wormhole)
 
 	def run_game(self): 
 		#Main loop for the game
@@ -47,21 +50,38 @@ class RocketGame:
 	def _update_pieces(self): 
 		self.ship.update()
 		self._update_bullets()
+		self.star_grid._update_stars()
+		self._collisions()
 		
 
 	def _update_bullets(self): 
+		#Move bullets
 		self.bullets.update()
+		#Delete off screen bullets
 		for bullet in self.bullets.copy(): 
 			if bullet.rect.right >= self.screen_rect.right: 
 				self.bullets.remove(bullet)
+		
+	def _collisions(self): 
+		#Detect bullet collisions with stars
+		collisions = pygame.sprite.groupcollide(self.bullets, self.star_grid.stars, True, True)
+		#Detect star collisions with ship
+		if pygame.sprite.spritecollideany(self.ship, self.star_grid.stars):
+			self.ship._restart()
+
+		if pygame.sprite.spritecollide(self.ship, self.wormholes, True): 
+			print('win!')
+
 
 ##### step 3: draw new screen 
 	def _updated_screen(self): 
 		self.screen.blit(self.settings.bg_image, (0,0))
+		self.wormholes.draw(self.screen)
 		self.ship.blitme()
 		for bullet in self.bullets.sprites(): 
 			bullet.draw_bullet()
 		self.star_grid.stars.draw(self.screen)
+
 
 
 

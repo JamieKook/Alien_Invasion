@@ -46,5 +46,9 @@ class Ship(Sprite):
 			new_bullet = Bullet(self.game)
 			self.bullets.add(new_bullet)
 
+	def _restart(self): 
+		self.rect.midleft = self.screen_rect.midleft
+
+
 
 
